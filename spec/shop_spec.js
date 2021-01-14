@@ -48,9 +48,11 @@ describe("Shop", () => {
     });
 
     describe("updateQuality()", () => {
-      it("Should reduce a positive quality on an in date 'normal' item by 1", () => {
+      it("Should reduce a positive quality and sellIn on an in date 'normal' item by 1", () => {
         let items = normalItemShop.updateQuality();
         expect(items[0].quality).toEqual(9);
+        expect(items[0].sellIn).toEqual(9);
+
       });
 
       it("Cannot reduce quality below 0", () => {
@@ -59,10 +61,12 @@ describe("Shop", () => {
         expect(items[0].quality).toEqual(0);
       });
 
-      it("Degrades item quality twice as fast after sell by has passed", () => {
+      it("Degrades item quality twice as fast after sell by has passed, sellIn still reducing", () => {
         let gildedRose = new Shop([ normalItemPastSellby ]);
         let items = gildedRose.updateQuality();
         expect(items[0].quality).toEqual(8);
+        expect(items[0].sellIn).toEqual(-1);
+
       });
 
       it("Increases the quality of brie as it gets older", () => {
