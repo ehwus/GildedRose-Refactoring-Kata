@@ -1,30 +1,56 @@
 const { Shop, Item } = require("../src/gilded_rose.js");
 
+let fakeNormalItem = {
+    name: "foo",
+    sellIn: 10,
+    quality: 10
+}
+
 describe("Shop", () => {
+    beforeEach(() => {
+        normalItem = {
+            name: "foo",
+            sellIn: 10,
+            quality: 10
+        }
+
+        normalItemPastSellby = {
+            name: "foo",
+            sellIn: 0,
+            quality: 10
+        }
+
+        zeroQualityItem = {
+            name: "foo",
+            sellIn: 5,
+            quality: 0
+        }
+
+        normalItemShop = new Shop([ normalItem ]);
+    });
+
     it("correctly add items to the inventory", () => {
-      let gildedRose = new Shop([new Item("foo", 0, 0)]);
-      expect(gildedRose.items[0].name).toEqual("foo");
-      expect(gildedRose.items[0].sellIn).toEqual(0);
-      expect(gildedRose.items[0].quality).toEqual(0);
+      expect(normalItemShop.items[0].name).toEqual("foo");
+      expect(normalItemShop.items[0].sellIn).toEqual(10);
+      expect(normalItemShop.items[0].quality).toEqual(10);
     });
 
     describe("updateQuality()", () => {
       it("Should reduce a positive quality on an in date 'normal' item by 1", () => {
-        let gildedRose = new Shop([new Item("foo", 10, 10)]);
-        let items = gildedRose.updateQuality();
+        let items = normalItemShop.updateQuality();
         expect(items[0].quality).toEqual(9);
       });
 
       it("Cannot reduce quality below 0", () => {
-        let gildedRose = new Shop([new Item("foo", 10, 0)]);
+        let gildedRose = new Shop([ zeroQualityItem ]);
         let items = gildedRose.updateQuality();
         expect(items[0].quality).toEqual(0);
       });
 
       it("Degrades item quality twice as fast after sell by has passed", () => {
-        let gildedRose = new Shop([new Item("foo", 0, 2)]);
+        let gildedRose = new Shop([ normalItemPastSellby ]);
         let items = gildedRose.updateQuality();
-        expect(items[0].quality).toEqual(0);
+        expect(items[0].quality).toEqual(8);
       });
     });
   });
