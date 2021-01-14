@@ -32,6 +32,12 @@ describe("Shop", () => {
             quality: 10
         };
 
+        legendaryItem = {
+            name: "Sulfuras, Hand of Ragnaros",
+            sellIn: 10,
+            quality: 10
+        }
+
         normalItemShop = new Shop([ normalItem ]);
     });
 
@@ -63,6 +69,13 @@ describe("Shop", () => {
         let gildedRose = new Shop([ freshBrie ]);
         let items = gildedRose.updateQuality();
         expect(items[0].quality).toEqual(11);
+      });
+
+      it("Doesn't degrade the time to sell or quality of legendary items", () => {
+        let gildedRose = new Shop([ legendaryItem ])
+        let items = gildedRose.updateQuality();
+        expect(items[0].quality).toEqual(10);
+        expect(items[0].sellIn).toEqual(10);
       });
     });
   });
