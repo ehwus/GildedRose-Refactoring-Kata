@@ -35,7 +35,7 @@ describe("Shop", () => {
         legendaryItem = {
             name: "Sulfuras, Hand of Ragnaros",
             sellIn: 10,
-            quality: 10
+            quality: 80
         }
 
         normalItemShop = new Shop([ normalItem ]);
@@ -78,8 +78,19 @@ describe("Shop", () => {
       it("Doesn't degrade the time to sell or quality of legendary items", () => {
         let gildedRose = new Shop([ legendaryItem ])
         let items = gildedRose.updateQuality();
-        expect(items[0].quality).toEqual(10);
+        expect(items[0].quality).toEqual(80);
         expect(items[0].sellIn).toEqual(10);
+      });
+
+      it("Reduces the quality of a backstage pass to 0 after sellby", () => {
+        let ticket = {
+            name: 'Backstage passes to a TAFKAL80ETC concert',
+            quality: 50,
+            sellIn: 0
+        }
+        let gildedRose = new Shop([ ticket ]);
+        let items = gildedRose.updateQuality();
+        expect(items[0].quality).toEqual(0)
       });
     });
   });
