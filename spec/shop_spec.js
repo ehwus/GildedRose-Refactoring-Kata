@@ -26,6 +26,12 @@ describe("Shop", () => {
             quality: 0
         }
 
+        freshBrie = {
+            name: 'Aged Brie',
+            sellIn: 10,
+            quality: 10
+        };
+
         normalItemShop = new Shop([ normalItem ]);
     });
 
@@ -51,6 +57,12 @@ describe("Shop", () => {
         let gildedRose = new Shop([ normalItemPastSellby ]);
         let items = gildedRose.updateQuality();
         expect(items[0].quality).toEqual(8);
+      });
+
+      it("Increases the quality of brie as it gets older", () => {
+        let gildedRose = new Shop([ freshBrie ]);
+        let items = gildedRose.updateQuality();
+        expect(items[0].quality).toEqual(11);
       });
     });
   });
