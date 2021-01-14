@@ -1,6 +1,5 @@
 const Item = require("../src/gilded_rose.js").Item;
 
-
 describe("Item", () => {
     it("Initializes correctly", () => {
         let test = new Item("foo", 10, 10);
