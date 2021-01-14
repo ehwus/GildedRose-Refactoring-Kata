@@ -1,4 +1,4 @@
-const Item = require("../src/gilded_rose.js").Item;
+const Item = require("../src/item");
 
 describe("Item", () => {
     it("Initializes correctly", () => {

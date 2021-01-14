@@ -1,4 +1,4 @@
-const { Shop, Item } = require("../src/gilded_rose.js");
+const Shop = require("../src/shop");
 
 let fakeNormalItem = {
   name: "foo",
