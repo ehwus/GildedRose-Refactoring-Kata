@@ -15,7 +15,7 @@ describe("Gilded Rose", () => {
       expect(items[0].quality).toEqual(9);
     });
 
-    it("Cannot reduce quality below 0 on normal item", () => {
+    it("Cannot reduce quality below 0", () => {
       let gildedRose = new Shop([ new Item("foo", 10, 0) ]);
       let items = gildedRose.updateQuality();
       expect(items[0].quality).toEqual(0);
