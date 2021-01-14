@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Gilded Rose kata in Javascript with Jasmine",
   "scripts": {
-    "test": "jasmine"
+    "test": "nyc jasmine"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,8 @@
     "babel-preset-env": "1.7.0",
     "babel-register": "^6.26.0",
     "jasmine": "^3.2.0",
-    "jasmine-console-reporter": "^3.1.0"
+    "jasmine-console-reporter": "^3.1.0",
+    "nyc": "^15.1.0"
   },
   "babel": {
     "presets": [
